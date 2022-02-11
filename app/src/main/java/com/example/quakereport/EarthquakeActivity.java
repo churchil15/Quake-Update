@@ -117,9 +117,6 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
         adapter.clear();
     }
 
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -136,7 +133,6 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
         }
         return super.onOptionsItemSelected(item);
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -177,8 +173,5 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
         // LoaderManager -->
         LoaderManager loaderManager = getSupportLoaderManager();
         loaderManager.initLoader(EARTHQUAKE_LOADER_ID, null, this);
-
-
     }
-
 }
