@@ -6,12 +6,8 @@ import androidx.loader.content.AsyncTaskLoader;
 
 import java.util.List;
 
-// Loads a list of earthquakes by using an AsyncTask to perform the
-// network request to the given URL.
 public class EarthquakeLoader extends AsyncTaskLoader<List<Earthquake>> {
 
-    // Tag for log messages
-    // But we have not performed Logging in context with Loaders in our app so it is not used
     private static final String LOG_TAG = EarthquakeLoader.class.getName();
 
     // Query URL
