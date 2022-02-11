@@ -21,17 +21,11 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
     private static final String LOCATION_SEPARATOR = " of ";
 
     public EarthquakeAdapter(Activity context, ArrayList<Earthquake> earthquakes){
-        // Here, we initialize the ArrayAdapter's internal storage for the context and the list.
-        // the second argument is used when the ArrayAdapter is populating a single TextView.
-        // Because this is a custom adapter for two TextViews and an ImageView, the adapter is not
-        // going to use this second argument, so it can be any value. Here, we used 0.
         super(context, 0, earthquakes);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
-        // Check if there is an existing list item view (convertView) that we can reuse,
-        // otherwise, if convertView is null, then inflate a new list item layout.
         View listItemView = convertView;
         if (listItemView == null){
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.earthquake_list_item, parent, false);
@@ -45,7 +39,6 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
 
         // Set the proper background color on the magnitude circle.
-        // Fetch the background from the TextView, which is a GradientDrawable.
         GradientDrawable magnitudeCircle = (GradientDrawable) magnitudeView.getBackground();
 
         // Get the appropriate background color based on the current earthquake magnitude
@@ -61,13 +54,10 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         magnitudeView.setText(formattedMagnitude);
 
         // We are splitting the location into two parts--
-        // Location Offset and Primary Location
         String originalLocation = currentEarthquake.getPlace();
         String locationOffset;
         String primaryLocation;
 
-        // Checking if the location has an location offset or not,
-        // and then adjusting the primary and offset locations accordingly
         if (originalLocation.contains(LOCATION_SEPARATOR)){
             String[] parts = originalLocation.split(LOCATION_SEPARATOR);
             locationOffset = parts[0] + LOCATION_SEPARATOR;
@@ -101,9 +91,6 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         // Display the time of the current earthquake in that TextView
         timeView.setText(formattedTime);
 
-
-        // Return the whole list item layout (containing 2 TextViews and an ImageView)
-        // so that it can be shown in the ListView
         return  listItemView;
     }
 
@@ -160,6 +147,5 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         SimpleDateFormat timeFormatter = new SimpleDateFormat("h:mm a");
         return  timeFormatter.format(dateObject);
     }
-
 
 }
