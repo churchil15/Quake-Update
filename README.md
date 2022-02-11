@@ -15,3 +15,6 @@ Accessing something from the internet, parsing it, and displaying it on the scre
 feel like the screen is hanged or unresponsive. This makes the user experience very bad. 
 In order to resolve this it is recommended that to not make the Network call on the main thread. Network call can be made on the background thread while other UI related features
 can sill operate on the main thread. AsyncTask Callback methods can be used in order achieve this
+
+# NOTE
+I've manually added the apk file of the app with the name apk-debug.
