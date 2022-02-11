@@ -28,7 +28,6 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
     // TextView that is displayed when the list is empty
     private TextView emptyStateTextView;
 
-
     public static final String LOG_TAG = EarthquakeActivity.class.getName();
 
     // URL for earthquake data from the USGS dataset
@@ -36,7 +35,6 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
 
     // Adapter for the list of earthquakes
     private EarthquakeAdapter adapter;
-
 
     // Constant value for the earthquake loader ID. We can choose any integer.
     private static final int EARTHQUAKE_LOADER_ID = 1;
@@ -89,12 +87,7 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
         // Set empty state text to display "No earthquakes found."
         emptyStateTextView.setText(R.string.no_earthquakes);
 
-
-
-
-
-        // For Checking Internet Connectivity and displaying the message accordingly -->
-        // Get a reference to the ConnectivityManager to check state of network connectivity
+        // For Checking Internet Connectivity and displaying the message accordingly --
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
         // Get details on the currently active default data network
@@ -113,12 +106,6 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
 
         loadingIndicator.setVisibility(View.GONE);
 
-
-
-
-
-        // If there is a valid list of Earthquake, then add them to the adapter's
-        // data set. This will trigger the ListView to update.
         if (earthquakes != null && !earthquakes.isEmpty()) {
             adapter.addAll(earthquakes);
         }
@@ -127,7 +114,6 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
 
     @Override
     public void onLoaderReset(Loader<List<Earthquake>> loader) {
-        // Loader reset, so we can clear out our existing data.
         adapter.clear();
     }
 
@@ -190,21 +176,8 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
             }
         });
 
-
-        // This was the code for AsyncTask without the usage of loader
-//        // Start the AsyncTask to fetch the earthquake data
-//        EarthquakeAsyncTask task = new EarthquakeAsyncTask();
-//        task.execute(USGS_REQUEST_URL);
-
-
-
         // LoaderManager -->
-        // Get a reference to the LoaderManager, in order to interact with loaders.
         LoaderManager loaderManager = getSupportLoaderManager();
-
-        // Initialize the loader. Pass in the int ID constant defined above and pass in null for
-        // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
-        // because this activity implements the LoaderCallbacks interface).
         loaderManager.initLoader(EARTHQUAKE_LOADER_ID, null, this);
 
 
