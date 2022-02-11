@@ -37,7 +37,6 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         // Find the TextView with view ID magnitude
         TextView magnitudeView = (TextView) listItemView.findViewById(R.id.magnitude);
 
-
         // Set the proper background color on the magnitude circle.
         GradientDrawable magnitudeCircle = (GradientDrawable) magnitudeView.getBackground();
 
@@ -46,7 +45,6 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
         // Set the color on the magnitude circle
         magnitudeCircle.setColor(magnitudeColor);
-
 
         // Format the magnitude to show 1 decimal place
         String formattedMagnitude = formatMagnitude(currentEarthquake.getMagnitude());
