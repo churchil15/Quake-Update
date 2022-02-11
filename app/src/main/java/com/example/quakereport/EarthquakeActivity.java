@@ -153,11 +153,9 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
         adapter = new EarthquakeAdapter(this, new ArrayList<Earthquake>());
 
         // Set the adapter on the ListView
-        // so the list can be populated in the user interface
         earthquakeListView.setAdapter(adapter);
 
-        // Set an item click listener on the ListView, which sends an intent to a web browser
-        // to open a website with more information about the selected earthquake.
+        // Set an item click listener on the ListView
         earthquakeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
