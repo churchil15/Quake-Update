@@ -1,7 +1,7 @@
 # Quake-Update
 Quake Update is an Android Application that warns the user about recent earthquakes across the globe. The developer's API is provided by USGS website.
 
-This is an app that gets data on earthquakes information all across the globe. It uses networking concepts in android like JSON Parsing, HTTP Networking, 
+This is an app that gets data on earthquakes all across the globe. It uses networking concepts in android like JSON Parsing, HTTP Networking, 
 Threads & Parellelism to fetch data from the website's servers. The data is in JSON format from which we parse the date, time, magnitude, and location of
 the earthquake.
 When using an API from an external source it is very important to analyze the data that we get from that source modify our UI code accordingly. These knowledge helps
