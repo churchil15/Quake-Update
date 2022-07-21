@@ -9,7 +9,7 @@ us to properly adjust our logic in the java code.It is very important to design 
 For example if the logic is related to how the information is displayed in the UI, make the code changes in the adapter class.
 While establishing communication on network it is important to follow these steps: First to "form HTTP request" based on the information we want and from where we want to get it.
 Second, to "send the request" to the server which will process it and figure out a proper response to send back. Third, to "receive the response" and make a sense of it.
-And laslty to the "update the UI" code in order to display that information in our activity layout. HTTP Networking requires the usage of various important classes like
+And laslty "update the UI" code in order to display that information in our activity layout. HTTP Networking requires the usage of various important classes like
 URL class which identifies the location of an Internet resource, and HTTPURLConnection class that helps us to send and receive data across the web using an HTTP connection.
 Accessing something from the internet, parsing it, and displaying it on the screen is a big task which can take sometime to complete. This can block our UI making it 
 feel like the screen is hanged or unresponsive. This makes the user experience very bad. 
