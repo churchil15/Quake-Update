@@ -12,7 +12,7 @@ Second, to "send the request" to the server which will process it and figure out
 And laslty "update the UI" code in order to display that information in our activity layout. HTTP Networking requires the usage of various important classes like
 URL class which identifies the location of an Internet resource, and HTTPURLConnection class that helps us to send and receive data across the web using an HTTP connection.
 Accessing something from the internet, parsing it, and displaying it on the screen is a big task which can take sometime to complete. This can block our UI making it 
-feel like the screen is hanged or unresponsive. This makes the user experience very bad. 
+feel like the screen is hanged or unresponsive. This makes the user experience very bad. NetworkOnMainThreadException is an exception that occurs when a network request is made on the main thread.
 In order to resolve this it is recommended that to not make the Network call on the main thread. Network call can be made on the background thread while other UI related features
 can sill operate on the main thread. AsyncTask Callback methods can be used in order achieve this
 
