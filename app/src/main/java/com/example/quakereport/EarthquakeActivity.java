@@ -25,18 +25,10 @@ import java.util.List;
 
 public class EarthquakeActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Earthquake>> {
 
-    // TextView that is displayed when the list is empty
     private TextView emptyStateTextView;
-
     public static final String LOG_TAG = EarthquakeActivity.class.getName();
-
-    // URL for earthquake data from the USGS dataset
     private static final String USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query";
-
-    // Adapter for the list of earthquakes
     private EarthquakeAdapter adapter;
-
-    // Constant value for the earthquake loader ID. We can choose any integer.
     private static final int EARTHQUAKE_LOADER_ID = 1;
 
     @NonNull
@@ -63,53 +55,36 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
 
         Uri baseUri = Uri.parse(USGS_REQUEST_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
-
         uriBuilder.appendQueryParameter("format", "geojson");
         uriBuilder.appendQueryParameter("limit", itemNumber);
         uriBuilder.appendQueryParameter("minmag", minMagnitude);
         uriBuilder.appendQueryParameter("maxmag", maxMagnitude);
         uriBuilder.appendQueryParameter("orderby", orderBy);
 
-        // Create a new loader for the given URL
         return new EarthquakeLoader(this, uriBuilder.toString());
     }
 
     @Override
     public void onLoadFinished(Loader<List<Earthquake>> loader, List<Earthquake> earthquakes) {
 
-        // Hide loading indicator because the data has been loaded
         View loadingIndicator = findViewById(R.id.loading_indicator);
         loadingIndicator.setVisibility(View.GONE);
-
-        // Clear the adapter of previous earthquake data
         adapter.clear();
-
-        // Set empty state text to display "No earthquakes found."
         emptyStateTextView.setText(R.string.no_earthquakes);
 
-        // For Checking Internet Connectivity and displaying the message accordingly --
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        // Get details on the currently active default data network
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-        // If there is a network connection, fetch data
         if (networkInfo != null && networkInfo.isConnected()) {
-
             emptyStateTextView.setText(R.string.no_earthquakes);
-
         } else {
-
             emptyStateTextView.setText(R.string.no_internet_connection);
-
         }
 
         loadingIndicator.setVisibility(View.GONE);
-
         if (earthquakes != null && !earthquakes.isEmpty()) {
             adapter.addAll(earthquakes);
         }
-
     }
 
     @Override
@@ -139,33 +114,20 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
         super.onCreate(savedInstanceState);
         setContentView(R.layout.earthquake_activity);
 
-        // Find a reference to the ListView in the layout
         ListView earthquakeListView = (ListView) findViewById(R.id.list);
-
         emptyStateTextView = (TextView) findViewById(R.id.empty_view);
         earthquakeListView.setEmptyView(emptyStateTextView);
-
-        // Create a new adapter that takes an empty list of earthquakes as input
         adapter = new EarthquakeAdapter(this, new ArrayList<Earthquake>());
-
-        // Set the adapter on the ListView
         earthquakeListView.setAdapter(adapter);
 
-        // Set an item click listener on the ListView
         earthquakeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                // Find the current earthquake that was clicked on
                 Earthquake currentEarthquake = adapter.getItem(position);
-
-                // Convert the String URL into URI object (to pass into the Intent constructor)
                 Uri earthquakeUri = Uri.parse(currentEarthquake.getUrl());
-
-                // Create a new intent to view the earthquake URI
                 Intent websiteIntent = new Intent(Intent.ACTION_VIEW, earthquakeUri);
-
-                // Send the intent to launch a new activity
                 startActivity(websiteIntent);
             }
         });
