@@ -27,7 +27,6 @@ public final class QueryUtils {
 
     public static List<Earthquake> extractFeatureFromJson(String earthquakeJSON) {
 
-        // If the JSON string is empty or null, the return early.
         if (TextUtils.isEmpty(earthquakeJSON)){
             return null;
         }
@@ -35,42 +34,23 @@ public final class QueryUtils {
         List<Earthquake> earthquakes = new ArrayList<>();
 
         try {
-
-            // Create a JSONObject from the SAMPLE_JSON_RESPONSE string
             JSONObject baseJsonResponse = new JSONObject(earthquakeJSON);
-
-            // Extract the JSONArray associated with the key called "features",
-            // which represents a list of features (or earthquakes).
             JSONArray earthquakeArray = baseJsonResponse.getJSONArray("features");
 
-            // For each earthquake in the the earthquakeArray, create an Earthquake object
             for (int i = 0; i<earthquakeArray.length(); i++){
-
-                // Get a single earthquake at position i within the list of earthquakes
                 JSONObject currentEarthquake = earthquakeArray.getJSONObject(i);
-
                 JSONObject properties = currentEarthquake.getJSONObject("properties");
-
-                // Extract the value for the key called "mag"
                 float magnitude = Float.parseFloat(properties.getString("mag"));
 
-                // Extract the value for the key called "place"
                 String location = properties.getString("place");
-
-                // Extract the value for the key called "time"
                 long time = properties.getLong("time");
-
-                // Extract the value for the key called "url"
                 String url = properties.getString("url");
-
-     
                 Earthquake earthquake = new Earthquake(magnitude, location, time, url);
 
                 earthquakes.add(earthquake);
             }
 
         } catch (JSONException e) {
-
             Log.e("QueryUtils", "Problem parsing the earthquake JSON results", e);
         }
 
@@ -139,10 +119,7 @@ public final class QueryUtils {
     }
 
     public static List<Earthquake> fetchEarthquakeData(String requestUrl) {
-        // Create URL object
         URL url = createUrl(requestUrl);
-
-        // Perform HTTP request to the URL and receive a JSON response back
         String jsonResponse = null;
         try{
             jsonResponse = makeHttpRequest(url);
@@ -150,10 +127,8 @@ public final class QueryUtils {
             Log.e(LOG_TAG, "Problem making the HTTP request.", e);
         }
 
-        // Extract relevant fields from the JSON response and create a list of Earthquake(s)
         List<Earthquake> earthquakes = extractFeatureFromJson(jsonResponse);
 
-        // Return the list of Earthquake(s)
         return earthquakes;
     }
 }
